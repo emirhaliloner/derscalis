@@ -268,7 +268,39 @@ if (isset($_POST['guncelle'])){
         </div>
         <div style="position:absolute;width:21%;"
         <div class="col-lg-3 ds">
+            <h3>En Son Eklenenler</h3>
 
+            <!-- First Action -->
+            <div class="desc">
+
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Second Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Third Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Fourth Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Fifth Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
             <!-- USERS ONLINE SECTION -->
             <h3>Duyurular</h3>
             <!-- First Member -->
