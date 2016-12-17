@@ -208,65 +208,133 @@ if (isset($_POST['guncelle'])){
 </aside>
 <section id="main-content">
     <section class="wrapper">
-        <form action="" method="post">
-            <h2 class="form-baslik">Düşüncelerinizi ve Yorumlarınızı Yazınız</h2>
-            <?php
+        <div style="position:relative;float:left;width:70%;height:auto;">
+            <form action="" method="post">
+                <h2 class="form-baslik">Düşüncelerinizi ve Yorumlarınızı Yazınız</h2>
+                <?php
 
-            if(isset($_POST['submit'])){
-                session_start();
-                ob_start();
-                error_reporting(0);
-                $baglanti = mysqli_connect('localhost','emir','1234','kayit');
-                $konu=$_POST['konu'];
-                $yaz=$_POST['yaz'];
-                $id=$_SESSION['kid'];
-                $zaman=date("d M Y H:i:s");
-                $sql ="INSERT INTO mesaj (konu,tarih,yaz,kid) VALUES('$konu','$zaman','$yaz','$id')";
-                if($konu=="" || $yaz=="") {
-                    echo "<div style='background-color:#E71212;width:auto;height:auto;'>
+                if(isset($_POST['submit'])){
+                    session_start();
+                    ob_start();
+                    error_reporting(0);
+                    $baglanti = mysqli_connect('localhost','emir','1234','kayit');
+                    $konu=$_POST['konu'];
+                    $yaz=$_POST['yaz'];
+                    $id=$_SESSION['kid'];
+                    $zaman=date("d M Y H:i:s");
+                    $sql ="INSERT INTO mesaj (konu,tarih,yaz,kid) VALUES('$konu','$zaman','$yaz','$id')";
+                    if($konu=="" || $yaz=="") {
+                        echo "<div style='background-color:#E71212;width:auto;height:auto;'>
 				<p style='text-align:center;font-size:13pt'>Lütfen tüm bilgileri doldurunuz.<img style='width:30px;height:30px' src='hata.png'/></div>";
-                }
-                else if($baglanti->query($sql) == TRUE){
-                    echo "<div style='background-color:#79C53A;width:auto;height:auto;'>
+                    }
+                    else if($baglanti->query($sql) == TRUE){
+                        echo "<div style='background-color:#79C53A;width:auto;height:auto;'>
 				<p style='text-align:center;font-size:13pt'>Kaydınız eklendi.<img style='width:30px;height:30px' src='onay.png'/></div>";
 
+                    }
+                    ob_end_flush();
                 }
-                ob_end_flush();
+                ?>
+                <div class="login-wrap">
+                    Konu: <input style='padding:20px' type="text" class="form-control" placeholder="Konu Gir" name="konu" autofocus>
+                    <br>
+                    Mesaj: <textarea style='height:200px;padding-left:10px;resize:none;' type="text" class="form-control" placeholder="Mesajınızı Girebilirsiniz..." name="yaz"></textarea><br>
+                    <button style='width:100px;background-color:#44CC3F' class="btn btn-theme btn-block" type="submit" name="submit"><i class="fa fa-lock">&nbsp;</i>Kaydet</button>
+                </div>
+            </form>
+            <br>
+
+            <?php
+            ob_start();
+            error_reporting(0);
+            $baglanti = mysqli_connect('localhost','emir','1234','kayit');
+            $sorgu = "SELECT k.kad,m.konu,m.tarih,m.yaz FROM kullanicilar as k,mesaj as m where k.kid=m.kid";
+            $sorguSonucu = mysqli_query($baglanti, $sorgu) or trigger_error("Hata: ". mysqli_error($mysqli), E_USER_ERROR);
+            if($sorguSonucu) {
+                echo "<table border='1px' >";
+                while($kayit = mysqli_fetch_assoc($sorguSonucu)) {
+
+                    echo "<div style='background-color:#E8E5E5'><div style='font-size:13pt;font-weight:bold;'><img style='float:left;width:25px;height:25px;' src='ico.png'/>&nbsp;"
+                        .$kayit['kad']."</div><br><div style='padding:5px;border:0px;border-radius:5px;font-weight:bold;'>Konu:"
+                        . $kayit['konu'] . "</div>Tarih:".$kayit['tarih'].
+                        "<div style='padding:5px;border:0px;border-radius:5px'>Mesaj:" . $kayit['yaz'] .
+                        "</div><br><hr></div>";
+
+                }
             }
+            echo "</table>";
+            ob_end_flush();
             ?>
-            <div class="login-wrap">
-                Konu: <input style='padding:20px' type="text" class="form-control" placeholder="Konu Gir" name="konu" autofocus>
-                <br>
-                Mesaj: <textarea style='height:200px;padding-left:10px;resize:none;' type="text" class="form-control" placeholder="Mesajınızı Girebilirsiniz..." name="yaz"></textarea><br>
-                <button style='width:100px;background-color:#44CC3F' class="btn btn-theme btn-block" type="submit" name="submit"><i class="fa fa-lock">&nbsp;</i>Kaydet</button>
+        </div>
+        <div style="position:absolute;width:21%;"
+        <div class="col-lg-3 ds">
+            <h3>En Son Eklenenler</h3>
+
+            <!-- First Action -->
+            <div class="desc">
+
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
             </div>
-        </form>
-        <br>
+            <!-- Second Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Third Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Fourth Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- Fifth Action -->
+            <div class="desc">
+                <div class="details">
+                    <p>Eklenenler Burada Olacak</p>
+                </div>
+            </div>
+            <!-- USERS ONLINE SECTION -->
+            <h3>Duyurular</h3>
+            <!-- First Member -->
+            <div class="desc">
+                <div class="details">
+                    <p>Burada Duyurular Olacak</p>
+                </div>
+            </div>
+            <!-- Second Member -->
+            <div class="desc">
 
-        <?php
-        ob_start();
-        error_reporting(0);
-        $baglanti = mysqli_connect('localhost','emir','1234','kayit');
-        $sorgu = "SELECT k.kad,m.konu,m.tarih,m.yaz FROM kullanicilar as k,mesaj as m where k.kid=m.kid";
-        $sorguSonucu = mysqli_query($baglanti, $sorgu) or trigger_error("Hata: ". mysqli_error($mysqli), E_USER_ERROR);
-        if($sorguSonucu) {
-            echo "<table border='1px' >";
-            while($kayit = mysqli_fetch_assoc($sorguSonucu)) {
-
-                echo "<div style='background-color:#E8E5E5'><div style='font-size:13pt;font-weight:bold;'><img style='float:left;width:25px;height:25px;' src='ico.png'/>&nbsp;"
-                    .$kayit['kad']."</div><br><div style='padding:5px;border:0px;border-radius:5px;font-weight:bold;'>Konu:"
-                    . $kayit['konu'] . "</div>Tarih:".$kayit['tarih'].
-                    "<div style='padding:5px;border:0px;border-radius:5px'>Mesaj:" . $kayit['yaz'] .
-                    "</div><br><hr></div>";
-
-            }
-        }
-        echo "</table>";
-        ob_end_flush();
-        ?>
-
-
-
+                <div class="details">
+                    <p>Burada Duyurular Olacak</p>
+                </div>
+            </div>
+            <!-- Third Member -->
+            <div class="desc">
+                <div class="details">
+                    <p>Burada Duyurular Olacak</p>
+                </div>
+            </div>
+            <!-- Fourth Member -->
+            <div class="desc">
+                <div class="details">
+                    <p>Burada Duyurular Olacak</p>
+                </div>
+            </div>
+            <!-- Fifth Member -->
+            <div class="desc">
+                <div class="details">
+                    <p>Burada Duyurular Olacak</p>
+                </div>
+            </div>
+        </div>
 
 
     </section>
